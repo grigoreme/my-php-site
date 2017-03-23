@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="row">	
-        
+    <div class="row">
+
         <div class="col-md-12">
-		
+
 			<div class="row">
 				<?php
 					$curr_db = $db -> select("SELECT Categorie.Database from clopotel_md.Categorie WHERE ID=".intval($_GET['cat']." LIMIT 1"),"clopotel_md");
@@ -16,47 +16,54 @@
 									<div class="col-sm-4 col-lg-4 col-md-4">
 									<img class="img-responsive" src="'.$calc[$i]['Cover'].'" alt="">
 									</div>
-									<div class="caption-full">
-										<h4 class="pull-right">'.$calc[$i]['Price'].' Lei</h4>
+									<div class="caption-full container">
+										<h3 class="text-danger pull-right">'.$calc[$i]['Price'].' Lei</h3>
 										<h4><a href="#">'.$calc[$i]['Firma'].' '.$calc[$i]['Model'].' '.$calc[$i]['Serie'].'</a>
 										</h4>
-										<p>'.translate_get($_SESSION['lang'],"Firma").": ".$calc[$i]["Firma"].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Model").": ".$calc[$i]["Model"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Serie").": ".$calc[$i]["Serie"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Culoare").": ".$calc[$i]["Culoare"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Procesor").": ".$calc[$i]["Procesor"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Model_Procesor").": ".$calc[$i]["Model_Procesor"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Nuclee").": ".$calc[$i]["Nuclee"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Frecventa").": ".$calc[$i]["Frecventa"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Tip_Procesor").": ".$calc[$i]["Tip_Procesor"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Display").": ".$calc[$i]["Display"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Rezolutie").": ".$calc[$i]["Rezolutie"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Diagonala").": ".$calc[$i]["Diagonala"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Alimentare").": ".$calc[$i]["Alimentare"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Sistem_Operare").": ".$calc[$i]["Sistem_Operare"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Dimensiune").": ".$calc[$i]["Dimensiune"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Greutate").": ".$calc[$i]["Greutate"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"RAM").": ".$calc[$i]["RAM"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Capacitate").": ".$calc[$i]["Capacitate"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Tip_capacitate").": ".$calc[$i]["Tip_capacitate"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Video").": ".$calc[$i]["Video"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Capacitate_Video").": ".$calc[$i]["Capacitate_Video"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Bluetooth").": ".$calc[$i]["Bluetooth"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Wifi").": ".$calc[$i]["Wifi"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"USB2_0").": ".$calc[$i]["USB2_0"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"USB3_0").": ".$calc[$i]["USB3_0"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"HDMI").": ".$calc[$i]["HDMI"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"VGA").": ".$calc[$i]["VGA"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"RJ_45").": ".$calc[$i]["RJ_45"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Audio").": ".$calc[$i]["Audio"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"DVD").": ".$calc[$i]["DVD"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Camera").": ".$calc[$i]["Camera"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Microfon").": ".$calc[$i]["Microfon"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Card_reader").": ".$calc[$i]["Card_reader"].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Num_pad").": ".$calc[$i]["Num_pad"].'</p>
+										<p><small>'.translate_get($_SESSION['lang'],"Firma")."</small>: ".$calc[$i]["Firma"].'</p>
+										<p><small>'.translate_get($_SESSION['lang'],"Model")."</small>: ".$calc[$i]["Model"].'</p>
+										<p><small>'.translate_get($_SESSION['lang'],"Serie")."</small>: ".$calc[$i]["Serie"].'</p>
+										<p><small>'.translate_get($_SESSION['lang'],"Culoare")."</small>: ".$calc[$i]["Culoare"].'</p>
+										<p><small>'.translate_get($_SESSION['lang'],"Procesor")."</small>: ".$calc[$i]["Procesor"].'</p>
+										<p><small>'.translate_get($_SESSION['lang'],"Model_Procesor")."</small>: ".$calc[$i]["Model_Procesor"].'</p>
+                    <button style="display: block; width: 100%;" class = "btn btn-default" data-toggle="collapse" data-target="#more">More Information</button>
+                    <div id="more" class="collapse container caption-full">
+                      <div class="col-md-3 col-md-offset-3">
+    										<p><small>'.translate_get($_SESSION['lang'],"Nuclee")."</small>: ".$calc[$i]["Nuclee"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Frecventa")."</small>: ".$calc[$i]["Frecventa"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Tip_Procesor")."</small>: ".$calc[$i]["Tip_Procesor"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Display")."</small>: ".$calc[$i]["Display"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Rezolutie")."</small>: ".$calc[$i]["Rezolutie"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Diagonala")."</small>: ".$calc[$i]["Diagonala"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Alimentare")."</small>: ".$calc[$i]["Alimentare"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Sistem_Operare")."</small>: ".$calc[$i]["Sistem_Operare"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Dimensiune")."</small>: ".$calc[$i]["Dimensiune"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Greutate")."</small>: ".$calc[$i]["Greutate"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"RAM")."</small>: ".$calc[$i]["RAM"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Capacitate")."</small>: ".$calc[$i]["Capacitate"].'</p>
+      									<p><small>'.translate_get($_SESSION['lang'],"Tip_capacitate")."</small>: ".$calc[$i]["Tip_capacitate"].'</p>
+      									<p><small>'.translate_get($_SESSION['lang'],"Video")."</small>: ".$calc[$i]["Video"].'</p>
+                      </div>
+                      <div class="col-md-3 col-md-offset-1">
+    										<p><small>'.translate_get($_SESSION['lang'],"Capacitate_Video")."</small>: ".$calc[$i]["Capacitate_Video"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Bluetooth")."</small>: ".$calc[$i]["Bluetooth"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Wifi")."</small>: ".$calc[$i]["Wifi"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"USB2_0")."</small>: ".$calc[$i]["USB2_0"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"USB3_0")."</small>: ".$calc[$i]["USB3_0"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"HDMI")."</small>: ".$calc[$i]["HDMI"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"VGA")."</small>: ".$calc[$i]["VGA"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"RJ_45")."</small>: ".$calc[$i]["RJ_45"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Audio")."</small>: ".$calc[$i]["Audio"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"DVD")."</small>: ".$calc[$i]["DVD"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Camera")."</small>: ".$calc[$i]["Camera"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Microfon")."</small>: ".$calc[$i]["Microfon"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Card_reader")."</small>: ".$calc[$i]["Card_reader"].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Num_pad")."</small>: ".$calc[$i]["Num_pad"].'</p>
+                      </div>
+                    </div>
 									</div>
 									<div class="ratings">
-								
+
                     </div>
                 </div><br><Br>
 								<br><Br>';
@@ -71,65 +78,74 @@
 									<div class="col-sm-4 col-lg-4 col-md-4">
 									<img class="img-responsive" src="'.$ph[$i]['Cover'].'" alt="">
 									</div>
-									<div class="caption-full">
-										<h4 class="pull-right">'.$ph[$i]['Price'].' Lei</h4>
-										<h4><a href="#">'.$ph[$i]['Firma'].' '.$ph[$i]['Model'].' '.$ph[$i]['Serie'].'</a>
+									<div class="caption-full container">
+										<h4 class="text-danger pull-right">'.$ph[$i]['Price'].' Lei</h4>
+										<h4 class=""><a href="#">'.$ph[$i]['Firma'].' '.$ph[$i]['Model'].' '.$ph[$i]['Serie'].'</a>
 										</h4>
-										<p>'.translate_get($_SESSION['lang'],"Firma").": ".$ph[$i]['Firma'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Model").": ".$ph[$i]['Model'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Serie").": ".$ph[$i]['Serie'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Culoare").": ".$ph[$i]['Culoare'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Tastatura").": ".$ph[$i]['Tastatura'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Greutate").": ".$ph[$i]['Greutate'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Dimensiune").": ".$ph[$i]['Dimensiune'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"2G").": ".$ph[$i]['2G'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"3G").": ".$ph[$i]['3G'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"4G").": ".$ph[$i]['4G'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"SIM").": ".$ph[$i]['SIM'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"SIM_Slots").": ".$ph[$i]['SIM_Slots'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Sistem_Operare").": ".$ph[$i]['Sistem_Operare'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"GPS").": ".$ph[$i]['GPS'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Rezolutie_Display").": ".$ph[$i]['Rezolutie_Display'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Tehnologie_Display").": ".$ph[$i]['Tehnologie_Display'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"TouchScreen").": ".$ph[$i]['TouchScreen'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Culori_K").": ".$ph[$i]['Culori_K'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Diagonala").": ".$ph[$i]['Diagonala'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"MultiTouch").": ".$ph[$i]['MultiTouch'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"SlotMemorie").": ".$ph[$i]['SlotMemorie'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"SlotMemorie_Limit").": ".$ph[$i]['SlotMemorie_Limit'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Memorie").": ".$ph[$i]['Memorie'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"RAM").": ".$ph[$i]['RAM'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"GPRS").": ".$ph[$i]['GPRS'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Bluetooth").": ".$ph[$i]['Bluetooth'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Wifi").": ".$ph[$i]['WIFI'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"NFC").": ".$ph[$i]['NFC'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"USB").": ".$ph[$i]['USB'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Audio_Jack").": ".$ph[$i]['Audio_Jack'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Camera").": ".$ph[$i]['Camera'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Rezoltie_Camera").": ".$ph[$i]['Rezoltie_Camera'].'</p>	
-										<p>'.translate_get($_SESSION['lang'],"Rezolutie_Foto").": ".$ph[$i]['Rezolutie_Foto'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Rezolutie_Video").": ".$ph[$i]['Rezolutie_Video'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Blitz").": ".$ph[$i]['Blitz'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Camera_Frontala").": ".$ph[$i]['Camera_Frontala'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Blitz_Frontal").": ".$ph[$i]['Blitz_Frontal'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Sensor_Frontal").": ".$ph[$i]['Sensor_Frontal'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Baterie").": ".$ph[$i]['Baterie'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Capacitate_Baterie").": ".$ph[$i]['Capacitate_Baterie'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Radio").": ".$ph[$i]['Radio'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Producator_Chipset").": ".$ph[$i]['Producator_Chipset'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Serie_Chipset").": ".$ph[$i]['Serie_Chipset'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Model_Chipset").": ".$ph[$i]['Model_Chipset'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"FingerPrint").": ".$ph[$i]['FingerPrint'].'</p>
+                    <div class="col-md-3"
+  										<p><small>'.translate_get($_SESSION['lang'],"Firma")."</small>: ".$ph[$i]['Firma'].'</p>
+  										<p><small>'.translate_get($_SESSION['lang'],"Model")."</small>: ".$ph[$i]['Model'].'</p>
+  										<p><small>'.translate_get($_SESSION['lang'],"Serie")."</small>: ".$ph[$i]['Serie'].'</p>
+  										<p><small>'.translate_get($_SESSION['lang'],"Culoare")."</small>: ".$ph[$i]['Culoare'].'</p>
+  										<p><small>'.translate_get($_SESSION['lang'],"Tastatura")."</small>: ".$ph[$i]['Tastatura'].'</p>
+  										<p><small>'.translate_get($_SESSION['lang'],"Greutate")."</small>: ".$ph[$i]['Greutate'].'</p>
+                    </div>
+                    <button style="display: block; width: 100%;" class = "btn btn-default" data-toggle="collapse" data-target="#more">More Information</button>
+                    <div id="more" class="collapse container caption-full">
+                      <div class="col-md-3 col-md-offset-3">
+                        <p><small>'.translate_get($_SESSION['lang'],"Dimensiune")."</small>: ".$ph[$i]['Dimensiune'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"2G")."</small>: ".$ph[$i]['2G'].'</p>
+    										<p><small>'.translate_get($_SESSION['lan2"g'],"3G")."</small>: ".$ph[$i]['3G'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"4G")."</small>: ".$ph[$i]['4G'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"SIM")."</small>: ".$ph[$i]['SIM'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"SIM_Slots")."</small>: ".$ph[$i]['SIM_Slots'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Sistem_Operare")."</small>: ".$ph[$i]['Sistem_Operare'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"GPS")."</small>: ".$ph[$i]['GPS'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Rezolutie_Display")."</small>: ".$ph[$i]['Rezolutie_Display'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Tehnologie_Display")."</small>: ".$ph[$i]['Tehnologie_Display'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"TouchScreen")."</small>: ".$ph[$i]['TouchScreen'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Culori_K")."</small>: ".$ph[$i]['Culori_K'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Diagonala")."</small>: ".$ph[$i]['Diagonala'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"MultiTouch")."</small>: ".$ph[$i]['MultiTouch'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"SlotMemorie")."</small>: ".$ph[$i]['SlotMemorie'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"SlotMemorie_Limit")."</small>: ".$ph[$i]['SlotMemorie_Limit'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Memorie")."</small>: ".$ph[$i]['Memorie'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"RAM")."</small>: ".$ph[$i]['RAM'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"GPRS")."</small>: ".$ph[$i]['GPRS'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Bluetooth")."</small>: ".$ph[$i]['Bluetooth'].'</p>
+                      </div>
+                      <div class="col-md-3 col-md-offset-1">
+    										<p><small>'.translate_get($_SESSION['lang'],"Wifi")."</small>: ".$ph[$i]['WIFI'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"NFC")."</small>: ".$ph[$i]['NFC'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"USB")."</small>: ".$ph[$i]['USB'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Audio_Jack")."</small>: ".$ph[$i]['Audio_Jack'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Camera")."</small>: ".$ph[$i]['Camera'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Rezoltie_Camera")."</small>: ".$ph[$i]['Rezoltie_Camera'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Rezolutie_Foto")."</small>: ".$ph[$i]['Rezolutie_Foto'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Rezolutie_Video")."</small>: ".$ph[$i]['Rezolutie_Video'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Blitz")."</small>: ".$ph[$i]['Blitz'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Camera_Frontala")."</small>: ".$ph[$i]['Camera_Frontala'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Blitz_Frontal")."</small>: ".$ph[$i]['Blitz_Frontal'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Sensor_Frontal")."</small>: ".$ph[$i]['Sensor_Frontal'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Baterie")."</small>: ".$ph[$i]['Baterie'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Capacitate_Baterie")."</small>: ".$ph[$i]['Capacitate_Baterie'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Radio")."</small>: ".$ph[$i]['Radio'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Producator_Chipset")."</small>: ".$ph[$i]['Producator_Chipset'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Serie_Chipset")."</small>: ".$ph[$i]['Serie_Chipset'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"Model_Chipset")."</small>: ".$ph[$i]['Model_Chipset'].'</p>
+    										<p><small>'.translate_get($_SESSION['lang'],"FingerPrint")."</small>: ".$ph[$i]['FingerPrint'].'</p>
+                      </div>
+                    </div>
 									</div>
 									<div class="ratings">
-										
+
 											</div>
 							</div><br><Br>
 								<br><Br>';
 						}
 					}
 				?>
-                
+
             </div>
         </div>
     </div>

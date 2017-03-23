@@ -7,17 +7,17 @@ class Notebook {
 	function __construct($db) {
 		self::$database=$db;
 	}
-	
+
     /**
      * Connect to the database
-     * 
+     *
      * @return bool false on failure / mysqli MySQLi object instance on success
      */
-    public function connect($database) {    
+    public function connect($database) {
         // Try and connect to the database
         if(!isset(self::$connection)) {
             // Load configuration as an array. Use the actual location of your configuration file
-            $config = parse_ini_file('config.ini'); 
+            $config = parse_ini_file('config.ini');
             self::$connection = new mysqli('localhost',$config['username'],$config['password'],$database);
         }
 
@@ -37,7 +37,7 @@ class Notebook {
      */
     public function query($query,$db) {
         // Connect to the database
-		
+
         $connection = $this -> connect($db);
 
         // Query the database
@@ -59,20 +59,20 @@ class Notebook {
 			echo "New record created successfully";
 		} else {
 			echo "Error: " . $query . "<br>" . $connection->error;
-		}	
+		}
 
 	}
 
     /**
      * Fetch the last error from the database
-     * 
+     *
      * @return string Database error message
      */
     public function error($db) {
         $connection = $this -> connect($db);
         return $connection -> error;
-    }	
-	
+    }
+
     public function select($query,$db) {
         $rows = array();
         $result = $this -> query($query,$db);
@@ -85,7 +85,7 @@ class Notebook {
         }
         return $rows;
     }
-	
+
     /**
      * Quote and escape value for use in a database query
      *
@@ -96,48 +96,48 @@ class Notebook {
         $connection = $this -> connect($db);
         return "'" . $connection -> real_escape_string($value) . "'";
     }
-	
+
 	protected $Ids=Array("ID"=>0);
-	
+
 	public $calc = Array(
 		"ID"=>'',
 		"Firma"=>'',
-		"Model"=>'',	
-		"Serie"=>'',	
-		"Culoare"=>'',	
-		"Procesor"=>'',	
-		"Model_Procesor"=>'',	
-		"Nuclee"=>'',	
-		"Frecventa_Procesor"=>'',	
-		"Tip_Procesor"=>'',	
-		"Display"=>'',	
-		"Rezolutie"=>'',	
-		"Diagonala"=>'',	
-		"Alimentare"=>'',	
-		"Sistem_Operare"=>'',	
-		"Dimensiune"=>'',	
-		"Greutate"=>'',	
-		"RAM"=>'',	
-		"Capacitate"=>'',	
-		"Tip_capacitate"=>'',	
-		"Video"=>'',	
-		"Capacitate_Video"=>'',	
-		"Bluetooth"=>'',	
-		"Wifi"=>'',	
-		"USB2_0"=>'',	
-		"USB3_0"=>'',	
-		"HDMI"=>'',	
-		"VGA"=>'',	
-		"RJ_45"=>'',	
-		"Audio"=>'',	
-		"DVD"=>'',	
-		"Camera"=>'',	
-		"Microfon"=>'',	
-		"Card_reader"=>'',	
+		"Model"=>'',
+		"Serie"=>'',
+		"Culoare"=>'',
+		"Procesor"=>'',
+		"Model_Procesor"=>'',
+		"Nuclee"=>'',
+		"Frecventa_Procesor"=>'',
+		"Tip_Procesor"=>'',
+		"Display"=>'',
+		"Rezolutie"=>'',
+		"Diagonala"=>'',
+		"Alimentare"=>'',
+		"Sistem_Operare"=>'',
+		"Dimensiune"=>'',
+		"Greutate"=>'',
+		"RAM"=>'',
+		"Capacitate"=>'',
+		"Tip_capacitate"=>'',
+		"Video"=>'',
+		"Capacitate_Video"=>'',
+		"Bluetooth"=>'',
+		"Wifi"=>'',
+		"USB2_0"=>'',
+		"USB3_0"=>'',
+		"HDMI"=>'',
+		"VGA"=>'',
+		"RJ_45"=>'',
+		"Audio"=>'',
+		"DVD"=>'',
+		"Camera"=>'',
+		"Microfon"=>'',
+		"Card_reader"=>'',
 		"Num_pad"=>'',
 		"Price"=>'',
 		"Cover"=>'');
-	
+
 	private $query= "SELECT
 			Firma.Firma,
 			Serie.Serie,
@@ -151,7 +151,7 @@ class Notebook {
 			notebook.Tip_capacitate, notebook.Video, notebook.Capacitate_Video, notebook.Bluetooth,
 			notebook.Wifi, notebook.USB2_0, notebook.USB3_0, notebook.HDMI, notebook.VGA, notebook.RJ_45, notebook.Price,
 			notebook.Audio, notebook.DVD, notebook.Camera, notebook.Microfon, notebook.Card_reader, notebook.Num_pad, notebook.Cover
-        FROM 
+        FROM
 			notebook,Sistem_Operare,Display,Alimentare,Procesor,Tip_Procesor,Culoare,Model,Serie,Firma
 		WHERE
 			Firma.ID = notebook.ID_Firma
@@ -162,11 +162,11 @@ class Notebook {
 			AND Display.ID = notebook.ID_Display
 			AND Alimentare.ID = notebook.ID_Alimentare
 			AND Sistem_Operare.ID = notebook.ID_Sistem_Operare";
-			
+
 
 	public function extract_toArray($Sort=""){
 		unset($this->calc);
-		
+
 		if($Sort!=""){
 			if($Sort=="NameA") $this->query = $this->query." ORDER BY Firma.Firma ASC, Serie.Serie ASC, Model.Model ASC";
 			else if($Sort=="NameD") $this->query = $this->query." ORDER BY Firma.Firma DESC, Serie.Serie DESC, Model.Model DESC";
@@ -176,45 +176,45 @@ class Notebook {
 			else if($Sort=="ID") { $this->query = $this->query." AND notebook.ID=".$_GET['item'];}
 			else if($Sort=="search") { $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";}
 		}
-		$rows = $this->select($this->query,"notebook");		
+		$rows = $this->select($this->query,"notebook");
 		foreach($rows as $row){
 			$this->calc[]=Array(
 			"ID"=>$row['ID'],
 			"Firma"=>$row['Firma'],
-			"Model"=>$row['Model'],	
-			"Serie"=>$row['Serie'],	
-			"Culoare"=>$row['Culoare'],	
-			"Procesor"=>$row['Procesor'],	
-			"Model_Procesor"=>$row['Model_Procesor'],	
-			"Nuclee"=>$row['Nuclee'],	
-			"Frecventa"=>$row['Frecventa'],	
-			"Tip_Procesor"=>$row['Tip_Procesor'],	
-			"Display"=>$row['Display'],	
-			"Rezolutie"=>$row['Rezolutie'],	
-			"Diagonala"=>$row['Diagonala'],	
-			"Alimentare"=>$row['Alimentare'],	
-			"Sistem_Operare"=>$row['Sistem_Operare'],	
-			"Dimensiune"=>$row['Dimensiune'],	
-			"Greutate"=>$row['Greutate'],	
-			"RAM"=>$row['RAM'],	
-			"Capacitate"=>$row['Capacitate'],	
-			"Tip_capacitate"=>$row['Tip_capacitate'],	
-			"Video"=>$row['Video'],	
-			"Capacitate_Video"=>$row['Capacitate_Video'],	
-			"Cover"=>$row['Cover'],	
-			"Price"=>$row['Price'],	
-			"Bluetooth"=>$row['Bluetooth']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"Wifi"=>$row['Wifi']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"USB2_0"=>$row['USB2_0']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"USB3_0"=>$row['USB3_0']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"HDMI"=>$row['HDMI']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"VGA"=>$row['VGA']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"RJ_45"=>$row['RJ_45']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"Audio"=>$row['Audio']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"DVD"=>$row['DVD']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"Camera"=>$row['Camera'],	
-			"Microfon"=>$row['Microfon']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
-			"Card_reader"=>$row['Card_reader']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),	
+			"Model"=>$row['Model'],
+			"Serie"=>$row['Serie'],
+			"Culoare"=>$row['Culoare'],
+			"Procesor"=>$row['Procesor'],
+			"Model_Procesor"=>$row['Model_Procesor'],
+			"Nuclee"=>$row['Nuclee'],
+			"Frecventa"=>$row['Frecventa'],
+			"Tip_Procesor"=>$row['Tip_Procesor'],
+			"Display"=>$row['Display'],
+			"Rezolutie"=>$row['Rezolutie'],
+			"Diagonala"=>$row['Diagonala'],
+			"Alimentare"=>$row['Alimentare'],
+			"Sistem_Operare"=>$row['Sistem_Operare'],
+			"Dimensiune"=>$row['Dimensiune'],
+			"Greutate"=>$row['Greutate'],
+			"RAM"=>$row['RAM'],
+			"Capacitate"=>$row['Capacitate'],
+			"Tip_capacitate"=>$row['Tip_capacitate'],
+			"Video"=>$row['Video'],
+			"Capacitate_Video"=>$row['Capacitate_Video'],
+			"Cover"=>$row['Cover'],
+			"Price"=>$row['Price'],
+			"Bluetooth"=>$row['Bluetooth']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"Wifi"=>$row['Wifi']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"USB2_0"=>$row['USB2_0']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"USB3_0"=>$row['USB3_0']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"HDMI"=>$row['HDMI']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"VGA"=>$row['VGA']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"RJ_45"=>$row['RJ_45']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"Audio"=>$row['Audio']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"DVD"=>$row['DVD']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"Camera"=>$row['Camera'],
+			"Microfon"=>$row['Microfon']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
+			"Card_reader"=>$row['Card_reader']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"),
 			"Num_pad"=>$row['Num_pad']=="1"?translate_get($_SESSION['lang'],"yes"):translate_get($_SESSION['lang'],"no"));
 		}
 		//var_dump($this->calc);

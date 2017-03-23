@@ -182,7 +182,7 @@ class Phone {
 
             */
 
-  private $query = "SELECT *,phone.ID as 'Phone' FROM phone
+  private $query = "SELECT *,phone.ID FROM phone
     INNER JOIN Firma ON phone.ID_Firma = Firma.ID
     INNER JOIN Serie ON phone.ID_Serie = Serie.ID
     INNER JOIN Model ON phone.ID_Model = Model.ID
@@ -205,10 +205,11 @@ class Phone {
 			else if($Sort=="Viewed") { $this->query = $this->query."";}
 			else if($Sort=="ID") { $this->query = $this->query." AND phone.ID=".$_GET['item'];}
 			else if($Sort=="search") { $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";}
+      //var_dump($this->query);
 		}
 		$rows = $this->select($this->query,"phone");
-
     //var_dump($rows);
+    //echo ($this->query);
     if($rows!=false)
   		foreach($rows as $row){
   			$this->Phone[]=Array(

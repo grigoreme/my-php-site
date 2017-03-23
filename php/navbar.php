@@ -97,7 +97,7 @@
 
 								<?php
 								if (login_check($mysqli) != true) {
-									echo "<p><a href='?goToUrl(window.location.href,\'page\',\'register\')'>".translate_get($_SESSION['lang'],"dont_have_account")."</a></p>";
+									echo "<p><a href='' onclick='javascript:goToUrl(window.location.href,\'page\',\'register\')'>".translate_get($_SESSION['lang'],"dont_have_account")."</a></p>";
 								}
 								?>
 
