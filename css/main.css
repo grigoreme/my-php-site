@@ -1,0 +1,113 @@
+.align-right{
+	float:right;
+}
+
+.hot-text{
+	color:#DE1B1B;
+}
+
+.mr10{
+	margin-left:10px;
+}
+
+.mb20{
+	margin-bottom:20px;
+}
+
+.mt20{
+	margin-top:20px;
+}
+
+.input_row{
+	margin:-8px;
+	width:100%;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.t14{
+	font-size:14px;
+}
+
+.h-divider{
+ margin-top:5px;
+ margin-bottom:5px;
+ height:1px;
+ width:100%;
+ border-top:1px solid #e5e5e5;
+}
+
+.panel-body img{
+	height:250px;
+}
+
+.sale {
+	position:absolute;
+	width:50px;
+	height:50px;
+	right:15px;
+	margin-top:40px;
+	background-image: url('../img/sale.png');
+	background-size:90% 90%;
+	background-repeat:no-repeat;
+	color:white;
+	font-size:20px;
+	-webkit-transform: rotate(315deg);
+	-moz-transform: rotate(315deg);
+	-o-transform: rotate(315deg);
+	-ms-transform: rotate(315deg);
+	transform: rotate(315deg);
+	line-height:220%;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 75%;
+	height: 200px;
+    background-position: center;
+    background-size: cover;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+.input-group-addon {
+    min-width:180px;
+    text-align:left;
+}

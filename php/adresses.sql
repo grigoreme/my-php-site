@@ -1,0 +1,1 @@
+SELECT members.username,members.Adress1,Adress.Region,Adress.City,Adress.PostalCode,Adress.Fax,Door.Street,Door.Build,Door.Door FROM Adress,Door,members WHERE members.Adress1 IN  Adress.ID AND Door.ID in Adress.DoorID AND members.username = ?
