@@ -1,46 +1,62 @@
 <div class="container">
-    <div class="row">	
-        <div class="col-md-3">
-			
-		
+    <div class="container">
+        <div class="col-md-3 row">
             <p class="lead"><?php echo translate_get($_SESSION['lang'],"filter");?></p>
-            <div class="list-group">
-			<!-- TIP(column left) !-->
-			<!--
-				<a href="#" id="btn-1" class="list-group-item" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Brand</a>
-				<ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
-					<div class="list-group-item">
-						<li><a href="#"><input type="checkbox">Apple</a></li>
-						<li><a href="#"><input type="checkbox">Dell</a></li>
-						<li><a href="#"><input type="checkbox">Asus</a></li>
-						<li><a href="#"><input type="checkbox">HP</a></li>
-						<li><a href="#"><input type="checkbox">Lenovo</a></li>
-						<li><a href="#"><input type="checkbox">Samsung</a></li>
-						<li><a href="#"><input type="checkbox">MSI</a></li>
-						<li><a href="#"><input type="checkbox">Toshiba</a></li>
-						<li><a href="#"><input type="checkbox">Fujitsu</a></li>
-					</div>
-				</ul>
-			!-->
+            <div class="list-group " id="filters">
+
+          <?php
+            $curr_db = $db -> select("SELECT Categorie.Database from clopotel_md.Categorie WHERE ID=".intval($_GET['type']." LIMIT 1"),"clopotel_md");
+            $curr_db = $curr_db[0]['Database'];
+            if($curr_db=="notebook"){
+  						include_once('inc/connect_notebook.php');
+  						$lapt = new Notebook("notebook");
+              $filters = $lapt->getFilters();
+              foreach($filters as $filter ) {
+                if($key!="ID"){
+                  echo '<a href="#" id="btn-'.$filter->getId().'" class="list-group-item" data-toggle="collapse" data-target="#'.$filter->getId().'" aria-expanded="false">'.$filter->getFilter().'</a>';
+                  echo '
+                  <ul class="nav collapse" id="'.$filter->getId().'" role="menu" aria-labelledby="btn-'.$filter->getId().'">
+                    <div class="list-group-item" id="'.$filter->getFilter().'">
+                      ';
+                      foreach($filter->getOptions() as $option){
+                        echo '<label><input type="checkbox" name="checkbox" value="'.$option.'">'.$option.'</label></br>';
+                      }
+                  echo '</div>
+                  </ul>
+                  ';
+                }
+              }
+            }
+            else if($curr_db=="phone"){
+              include_once('inc/connect_phone.php');
+  						$phone = new Phone("phone");
+              $filters = $phone->getFilters();
+              foreach($filters as $filter ) {
+                if($key!="ID"){
+                  echo '<a href="#" id="btn-'.$filter->getId().'" class="list-group-item" data-toggle="collapse" data-target="#'.$filter->getId().'" aria-expanded="false">'.$filter->getFilter().'</a>';
+                  echo '
+                  <ul class="nav collapse" id="'.$filter->getId().'" role="menu" aria-labelledby="btn-'.$filter->getId().'">
+                    <div class="list-group-item" id="'.$filter->getFilter().'">
+                      ';
+                      foreach($filter->getOptions() as $option){
+                      echo '<label><input type="checkbox" name="checkbox" value="'.$option.'">'.$option.'</label></br>';
+                      }
+                  echo '</div>
+                  </ul>
+                  ';
+                }
+              }
+            }
+          ?>
+          <!--
+            <button type="button" onclick="filterConfirm()" class="btn btn-default full-width btn-block">CONFIRM</button>
+          !-->
             </div>
         </div>
 
         <div class="col-md-9">
-			<!--
-			<nav class="nav row">
-				<ul class="nav col-sm-12">
-				<?php/*
-					$db = new Db("clopotel_md");
-					$rows = $db -> select("SELECT Nume from clopotel_md.Subcategorie WHERE ID_Categorie=".intval($_GET['type']),"clopotel_md");
-					foreach($rows as $row){
-						echo '<li><a class="col-sm-3 list-group-item">'.$row['Nume'].'</a></li>';
-					}*/
-				?>
-				</ul>
-			</nav>
-			!-->
-			
-            <div class="row nav mb20">
+
+            <div class="nav mb20">
 				<a href="#" id="btn-sort" class="list-group-item" data-toggle="collapse" data-target="#submenusort" aria-expanded="true"><?php echo translate_get($_SESSION['lang'],"sort"); ?></a>
 				<ul class="nav collapse col-sm-12" id="submenusort" role="menu" aria-labelledby="btn-sort">
 					<div class="list-group">
@@ -53,17 +69,16 @@
 					</div>
 				</ul>
 			</div>
-			
-			<div class="row">
+
+			<div class="container" id="items">
 				<?php
-					$curr_db = $db -> select("SELECT Categorie.Database from clopotel_md.Categorie WHERE ID=".intval($_GET['type']." LIMIT 1"),"clopotel_md");
-					$curr_db = $curr_db[0]['Database'];
 					if($curr_db=="notebook"){
 						include_once('inc/connect_notebook.php');
 						$lapt = new Notebook("notebook");
 						$calc = $lapt -> extract_toArray(isset($_GET['sort'])?$_GET['sort']:"");
+            if(count($calc)==0) echo 'nothing found';
 						for($i=0;$i<count($calc);$i++){
-							echo '<div class="col-sm-4 col-lg-4 col-md-4">
+							echo '<div class="col-sm-3 col-lg-3 col-md-3">
 								<div class="thumbnail">
 									<img src="'.$calc[$i]['Cover'].'" alt="'.$calc[$i]['Firma'].' '.$calc[$i]['Model'].' '.$calc[$i]['Serie'].'">
 									<div class="panel-footer">
@@ -71,7 +86,7 @@
 										<h4 class="pull-right"><small><del>'.$calc[$i]['Price'].' lei </del></small>'.(($calc[$i]['Price'])-1).' lei</h4>
 										<p></p>
 										<br><br>
-									
+
 									</div>
 								</div>
 							</div>
@@ -83,7 +98,7 @@
 						$phone = new Phone("phone");
 						$ph = $phone -> extract_toArray(isset($_GET['sort'])?$_GET['sort']:"");
 						for($i=0;$i<count($ph);$i++){
-							echo '<div class="col-sm-4 col-lg-4 col-md-4">
+							echo '<div class="col-sm-3 col-lg-3 col-md-3"">
 								<div class="thumbnail">
 									<img src="'.$ph[$i]['Cover'].'" alt="'.$ph[$i]['Firma'].' '.$ph[$i]['Serie'].' '.$ph[$i]['Model'].'">
 									<div class="panel-footer">
@@ -91,19 +106,15 @@
 										<h4 class="pull-right"><small><del>'.$ph[$i]['Price'].' lei </del></small>'.(($ph[$i]['Price'])-1).' lei</h4>
 										<p></p>
 										<br><br>
-										<p>'.translate_get($_SESSION['lang'],"Memorie").': '.$ph[$i]['Memorie'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"SIM_Slots").': '.$ph[$i]['SIM_Slots'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Sistem_Operare").': '.$ph[$i]['Sistem_Operare'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Chipset").': '.$ph[$i]['Serie_Chipset'].' '.$ph[$i]['Model_Chipset'].'</p>
 									</div>
 								</div>
 							</div>';
 						}
 					}
 				?>
-                
+
             </div>
         </div>
+      </div>
     </div>
-</div>
 <script src="js/jquery.js"></script>

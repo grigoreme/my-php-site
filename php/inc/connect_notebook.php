@@ -1,4 +1,5 @@
 <?php
+include_once('filter.php');
 class Notebook {
     // The database connection
     protected static $connection;
@@ -44,6 +45,22 @@ class Notebook {
         $result = $connection -> query($query);
 
         return $result;
+    }
+
+    public function getFilters(){
+      $filters = $this->select("SELECT TABLE_NAME AS 'Filter' FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='notebook' AND TABLE_NAME!='notebook'  ORDER BY TABLE_NAME ASC ",'notebook');
+      $temp = array();
+      for($k=0;$k<Count($filters);$k++){
+        $_options=$this->select('SELECT DISTINCT '.$filters[$k]['Filter'].' FROM '.$filters[$k]['Filter'] .' ORDER BY '.$filters[$k]['Filter'].' ASC' ,'notebook');
+        if($_options){
+          $temp[$k]=new Filter($filters[$k]['Filter'],array());
+          $temp[$k]->setId($k);
+          foreach($_options as $option){
+            $temp[$k]->addOptions($option[$filters[$k]['Filter']]);
+          }
+        }
+      }
+      return $temp;
     }
 
     /**
@@ -138,7 +155,8 @@ class Notebook {
 		"Price"=>'',
 		"Cover"=>'');
 
-	private $query= "SELECT
+	/*
+  private $query= "SELECT
 			Firma.Firma,
 			Serie.Serie,
 			Model.Model,
@@ -163,9 +181,32 @@ class Notebook {
 			AND Alimentare.ID = notebook.ID_Alimentare
 			AND Sistem_Operare.ID = notebook.ID_Sistem_Operare";
 
+      */
 
-	public function extract_toArray($Sort=""){
+  private $query = "SELECT *, notebook.ID FROM notebook
+    INNER JOIN Firma ON notebook.ID_Firma = Firma.ID
+    INNER JOIN Serie ON notebook.ID_Serie = Serie.ID
+    INNER JOIN Model ON notebook.ID_Model = Model.ID
+    INNER JOIN Culoare ON notebook.ID_Culoare = Culoare.ID
+    INNER JOIN Procesor ON notebook.ID_Procesor = Procesor.ID
+    INNER JOIN Tip_Procesor ON Procesor.Tip_Procesor = Tip_Procesor.ID
+    INNER JOIN Display ON notebook.ID_Display = Display.ID
+    INNER JOIN Alimentare ON notebook.ID_Alimentare = Alimentare.ID
+    INNER JOIN Sistem_Operare ON notebook.ID_Sistem_Operare = Sistem_Operare.ID
+  ";
+
+
+	public function extract_toArray($Sort="",$filter=""){
 		unset($this->calc);
+
+
+    if($filter!=""){ //filter was already transformed to SQL
+      if($Sort!=""){ // if sort exist put "AND"
+        $this->query= $this->query . " AND " .  $filter;
+      }else{//put "WHERE"
+        $this->query= $this->query . " WHERE " .  $filter;
+      }
+    }
 
 		if($Sort!=""){
 			if($Sort=="NameA") $this->query = $this->query." ORDER BY Firma.Firma ASC, Serie.Serie ASC, Model.Model ASC";
@@ -176,6 +217,7 @@ class Notebook {
 			else if($Sort=="ID") { $this->query = $this->query." AND notebook.ID=".$_GET['item'];}
 			else if($Sort=="search") { $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";}
 		}
+    
 		$rows = $this->select($this->query,"notebook");
 		foreach($rows as $row){
 			$this->calc[]=Array(

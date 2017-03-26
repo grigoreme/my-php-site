@@ -1,4 +1,5 @@
 <?php
+include_once('filter.php');
 class Phone {
     // The database connection
     protected static $connection;
@@ -27,6 +28,24 @@ class Phone {
             return false;
         }
         return self::$connection;
+    }
+
+    public function getFilters(){
+      $filters = $this->select("SELECT TABLE_NAME AS 'Filter' FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='phone' AND TABLE_NAME!='phone'  ORDER BY TABLE_NAME ASC ",'phone');
+      $temp = array();
+      for($k=0;$k<Count($filters);$k++){
+        if($filters[$k]['Filter']!='Camera'){
+          $_options=$this->select('SELECT DISTINCT '.$filters[$k]['Filter'].' FROM '.$filters[$k]['Filter'] .' ORDER BY '.$filters[$k]['Filter'].' ASC','phone');
+          if($_options){
+            $temp[$k]=new Filter($filters[$k]['Filter'],array());
+            $temp[$k]->setId($k);
+            foreach($_options as $option){
+              $temp[$k]->addOptions($option[$filters[$k]['Filter']]);
+            }
+          }
+        }
+      }
+      return $temp;
     }
 
     /**
@@ -195,8 +214,17 @@ class Phone {
     INNER JOIN Serie_Chipset ON phone.ID_Serie_Chipset = Serie_Chipset.ID
     INNER JOIN Model_Chipset ON phone.ID_Model_Chipset = Model_Chipset.ID";
 
-	public function extract_toArray($Sort=""){
+	public function extract_toArray($Sort="",$filter=""){
 		unset($this->Phone);
+
+    if($filter!=""){ //filter was already transformed to SQL
+      if($Sort!=""){ // if sort exist put "AND"
+        $this->query= $this->query . " AND " .  $filter;
+      }else{//put "WHERE"
+        $this->query= $this->query . " WHERE " .  $filter;
+      }
+    }
+
 		if($Sort!=""){
 			if($Sort=="NameA") $this->query = $this->query." ORDER BY Firma.Firma ASC, Serie.Serie ASC, Model.Model ASC";
 			else if($Sort=="NameD") $this->query = $this->query." ORDER BY Firma.Firma DESC, Serie.Serie DESC, Model.Model DESC";
@@ -207,6 +235,7 @@ class Phone {
 			else if($Sort=="search") { $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";}
       //var_dump($this->query);
 		}
+    
 		$rows = $this->select($this->query,"phone");
     //var_dump($rows);
     //echo ($this->query);

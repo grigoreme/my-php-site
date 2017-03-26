@@ -67,6 +67,7 @@
 									else
 										echo translate_get($_SESSION['lang'],"login");
 								?><b class="caret"></b></a>
+							</li>
 								<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
 									<li>
 								<?php
@@ -120,6 +121,7 @@
 										<li><a class="hot-text" href="?page=lang&lang=3">'.translate_get($_SESSION['lang'],"ru").'</a></li>';
 
 						?>
+					</ul>
 					</div>
 					<!-- /.navbar-collapse -->
 				</nav>
@@ -127,4 +129,3 @@
 		</div>
 	</div>
 	<script src="js/main.js"></script>
-	<div id="wrapper">

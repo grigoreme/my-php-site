@@ -8,7 +8,7 @@
 			$lapt = new Notebook("notebook");
 			$calc = $lapt -> extract_toArray(isset($_GET['sort'])?$_GET['sort']:"");
 			for($i=0;$i<count($calc);$i++){
-				echo '<div class="col-sm-4 col-lg-4 col-md-4">
+				echo '<div class="col-sm-6 col-lg-3 col-md-3 col-xs-10 col-sm-3">
 					<div class="thumbnail">
 						<img src="'.$calc[$i]['Cover'].'" alt="'.$calc[$i]['Firma'].' '.$calc[$i]['Model'].' '.$calc[$i]['Serie'].'">
 						<div class="panel-footer">
@@ -37,7 +37,7 @@
 			$phone = new Phone("phone");
 			$ph = $phone -> extract_toArray(isset($_GET['sort'])?$_GET['sort']:"");
 			for($i=0;$i<count($ph);$i++){
-				echo '<div class="col-sm-4 col-lg-4 col-md-4">
+				echo '<div class="col-sm-3 col-lg-3 col-md-3">
 					<div class="thumbnail">
 						<img src="'.$ph[$i]['Cover'].'" alt="'.$ph[$i]['Firma'].' '.$ph[$i]['Serie'].' '.$ph[$i]['Model'].'">
 						<div class="panel-footer">

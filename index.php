@@ -1,7 +1,7 @@
-<?php	
+<?php
 	include_once('php/main_include.php');
 ?>
-<!-- 
+<!--
 my pattern
 #2B2B2B  -black
 #DE1B1B  -red
@@ -18,14 +18,11 @@ my pattern
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet">
 	</head>
-	<body>		
-		
-		<?php include_once('php/main.php'); ?>
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<body>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<?php include_once('php/main.php'); ?>
 		</div>
 	</body>
 </html>

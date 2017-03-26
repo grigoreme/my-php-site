@@ -7,5 +7,4 @@
 	$add_new = new Db($cat);
 	$query="INSERT INTO ".$table." VALUES ('null','$args');";
 	echo $query;
-	$add_new -> insert($query,$cat);
 ?>

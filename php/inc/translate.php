@@ -23,7 +23,7 @@ include_once('connect.inc.php');
 	}
 
 	function translate_get($lang_name,$name){
-		$result="String not found";
+		$result="String not found[".$name."]!";
 		global $lang;
 		foreach($lang as $translate){
 			if(strtolower((string)$translate->Lang)==strtolower($lang_name))
