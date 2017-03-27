@@ -63,6 +63,23 @@ class Notebook {
       return $temp;
     }
 
+    public function getCart($memberID){
+      $items = "SELECT *, notebook.ID,CONCAT(Firma.Firma, ' ', Model.Model, ' ', Serie.Serie) as 'FullName' FROM notebook
+          INNER JOIN Firma ON notebook.ID_Firma = Firma.ID
+          INNER JOIN Serie ON notebook.ID_Serie = Serie.ID
+          INNER JOIN Model ON notebook.ID_Model = Model.ID
+          INNER JOIN Culoare ON notebook.ID_Culoare = Culoare.ID
+          INNER JOIN Procesor ON notebook.ID_Procesor = Procesor.ID
+          INNER JOIN Tip_Procesor ON Procesor.Tip_Procesor = Tip_Procesor.ID
+          INNER JOIN Display ON notebook.ID_Display = Display.ID
+          INNER JOIN Alimentare ON notebook.ID_Alimentare = Alimentare.ID
+          INNER JOIN Sistem_Operare ON notebook.ID_Sistem_Operare = Sistem_Operare.ID
+          INNER JOIN clopotel_md.Cart ON clopotel_md.Cart.item = notebook.ID
+          WHERE clopotel_md.Cart.members='$memberID' AND clopotel_md.Cart.category='1'
+        ";
+        return $this->select($items,'notebook');
+    }
+
     /**
      * Fetch rows from the database (SELECT query)
      *

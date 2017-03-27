@@ -31,7 +31,8 @@
 								<div class="thumbnail">
 									<img src="'.$calc[$i]['Cover'].'" alt="'.$calc[$i]['Firma'].' '.$calc[$i]['Model'].' '.$calc[$i]['Serie'].'">
 									<div class="panel-footer">
-										<h4><a href="index.php?page=item&item='.$calc[$i]['ID'].'&cat=1">'.$calc[$i]['Firma'].' '.$calc[$i]['Model'].' '.$calc[$i]['Serie'].'</a></h4>
+										<h4><a href="index.php?page=item&item='.$calc[$i]['ID'].'&cat=1">'.$calc[$i]['Firma'].' '.$calc[$i]['Model'].' '.$calc[$i]['Serie'].'</a>
+                    <input onclick="addToCart(\'1\',\''.$calc[$i]['ID'].'\',\''.$_SESSION['user_id'].'\',\'1\')" width="30" height="30" type="image" src="img/add-to-cart.png"></input></h4>
 										<h4 class="pull-right"><small><del>'.$calc[$i]['Price'].' lei </del></small>'.(($calc[$i]['Price'])-1).' lei</h4>
 										<p></p>
 										<br><br>
@@ -50,7 +51,8 @@
 								<div class="thumbnail">
 									<img src="'.$ph[$i]['Cover'].'" alt="'.$ph[$i]['Firma'].' '.$ph[$i]['Serie'].' '.$ph[$i]['Model'].'">
 									<div class="panel-footer">
-										<h4><a href="index.php?page=item&item='.$ph[$i]['ID'].'&cat=2">'.$ph[$i]['Firma'].' '.$ph[$i]['Serie'].' '.$ph[$i]['Model'].'</a></h4>
+										<h4><a href="index.php?page=item&item='.$ph[$i]['ID'].'&cat=2">'.$ph[$i]['Firma'].' '.$ph[$i]['Serie'].' '.$ph[$i]['Model'].'</a>
+                    <input onclick="addToCart(\'2\',\''.$ph[$i]['ID'].'\',\''.$_SESSION['user_id'].'\',\'1\')" width="30" height="30" type="image" src="img/add-to-cart.png"></input></h4>
 										<h4 class="pull-right"><small><del>'.$ph[$i]['Price'].' lei </del></small>'.(($ph[$i]['Price'])-1).' lei</h4>
 										<p></p>
 										<br><br>

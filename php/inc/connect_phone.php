@@ -30,6 +30,25 @@ class Phone {
         return self::$connection;
     }
 
+    public function getCart($memberID){
+      $items = "SELECT *,phone.ID, CONCAT(Firma.Firma, ' ', Model.Model, ' ', Serie.Serie) as 'FullName' FROM phone
+        INNER JOIN Firma ON phone.ID_Firma = Firma.ID
+        INNER JOIN Serie ON phone.ID_Serie = Serie.ID
+        INNER JOIN Model ON phone.ID_Model = Model.ID
+        INNER JOIN Culoare ON phone.ID_Culoare = Culoare.ID
+        INNER JOIN Sistem_Operare ON phone.ID_Sistem_Operare = Sistem_Operare.ID
+        INNER JOIN Display ON phone.ID_Display = Display.ID
+        INNER JOIN Camera ON phone.ID_Camera = Camera.ID
+        INNER JOIN Baterie ON phone.ID_Baterie = Baterie.ID
+        INNER JOIN Producator_Chipset ON phone.ID_Producator_Chipset = Producator_Chipset.ID
+        INNER JOIN Serie_Chipset ON phone.ID_Serie_Chipset = Serie_Chipset.ID
+        INNER JOIN Model_Chipset ON phone.ID_Model_Chipset = Model_Chipset.ID
+        INNER JOIN clopotel_md.Cart ON clopotel_md.Cart.item = phone.ID
+        WHERE clopotel_md.Cart.members='$memberID' AND clopotel_md.Cart.category='2'
+        ";
+        return $this->select($items,'phone');
+    }
+
     public function getFilters(){
       $filters = $this->select("SELECT TABLE_NAME AS 'Filter' FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='phone' AND TABLE_NAME!='phone'  ORDER BY TABLE_NAME ASC ",'phone');
       $temp = array();

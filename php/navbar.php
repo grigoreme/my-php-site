@@ -30,7 +30,10 @@
 						<ul class="nav navbar-nav">
 						<?php
 							$db = new Db("clopotel_md");
+							$userID=$_SESSION['user_id'];
 							$rows = $db -> select("SELECT * from clopotel_md.Categorie","clopotel_md");
+							$cartCount = $db -> select("SELECT Count(*) as Count from clopotel_md.Cart WHERE members='$userID'","clopotel_md");
+							$cartCount=$cartCount[0]['Count'];
 							$line=0;
 							foreach($rows as $row){
 								if($line==0){
@@ -48,7 +51,7 @@
 						?>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
-								<input id="search" value="<?php echo isset($_GET['search'])?$_GET['search']:'' ?>" type="text" class="form-control" placeholder="<?php echo translate_get($_SESSION['lang'],"search");?>">
+								<input id="search" type="text" class="form-control" placeholder="<?php echo translate_get($_SESSION['lang'],"search");?>">
 							</div>
 							<button type="button" onclick="goToUrl(updateURLParameter(window.location.href,'page','search'),'search',document.getElementById('search').value)" class="btn btn-default"><?php echo translate_get($_SESSION['lang'],"search");?></button>
 						</form>
@@ -76,7 +79,7 @@
 								if (login_check($mysqli) == true) {
 									echo '<p>'.translate_get($_SESSION['lang'],"currently_logged").' '. htmlentities($_SESSION['username']) . '.</p>';
 									echo '<input type="button" class="btn btn-success btn-block" value="'.translate_get($_SESSION['lang'],"myaccount").'" onclick="goToUrl(window.location.href,\'page\',\'account\')"/> ';
-									echo '<input type="button" class="btn btn-success btn-block" value="'.translate_get($_SESSION['lang'],"mycart").'" onclick="goToUrl(window.location.href,\'page\',\'cart\')"/> ';
+									echo '<button type="button" class="btn btn-success btn-block" onclick="goToUrl(window.location.href,\'page\',\'cart\')">'.translate_get($_SESSION['lang'],"mycart").' <span class="badge">'.$cartCount.'</span></button>';
 									echo '<input type="button" class="btn btn-error btn-block" value="'.translate_get($_SESSION['lang'],"logout").'"	onclick="goToUrl(window.location.href,\'page\',\'process_logout\')"/> ';
 									if(isset($_SESSION['access']))
 										if($_SESSION['access']==9){

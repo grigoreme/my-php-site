@@ -21,11 +21,28 @@ function addToCart(cat,item,user,count){
     type: "GET",
     url: "php/addToCart.php",
     data: string,
+    //success: function(data, textStatus) {
+    //  $("#items").html(data);
+    //},
+    error:function(exception){alert('Exeption:'+exception);}
+  });
+}
+
+function deleteFromCart(cat,item,user){
+  string = "cat=" +  cat + "&item="+item+"&user="+user+"&tourl=";
+  $.ajax({
+    type: "GET",
+    url: "php/deleteFromCart.php",
+    data: string,
     success: function(data, textStatus) {
-      $("#items").html(data);
+      window.location.reload(false); 
     },
     error:function(exception){alert('Exeption:'+exception);}
   });
+}
+
+function refreshCart(cat,item,user){
+  alert(cat,item,user);
 }
 
 function findGetParameter(parameterName) {

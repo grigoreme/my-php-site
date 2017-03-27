@@ -23,6 +23,7 @@
 							echo '<div class="thumbnail">
 									<div class="col-sm-4 col-lg-4 col-md-4">
 									<img class="img-responsive" src="'.$calc[$i]['Cover'].'" alt="">
+                  <p><input class="btn-info btn " value="'.translate_get($_SESSION['lang'],'addToCart').'" onclick="addToCart(\''.$_GET['cat'].'\',\''.$calc[$i]['ID'].'\',\''.$_SESSION['user_id'].'\',\'1\')" width="30" height="30" type="butto " src="img/add-to-cart.png"></input></p>
 									</div>
 									<div class="caption-full container">
 										<h3 class="text-danger pull-right">'.$calc[$i]['Price'].' Lei</h3>
@@ -85,6 +86,7 @@
 								echo '<div class="thumbnail">
 									<div class="col-sm-4 col-lg-4 col-md-4">
 									<img class="img-responsive" src="'.$ph[$i]['Cover'].'" alt="">
+                  <p><input class="btn-info btn" value="'.translate_get($_SESSION['lang'],'addToCart').'" onclick="addToCart(\''.$_GET['cat'].'\',\''.$ph[$i]['ID'].'\',\''.$_SESSION['user_id'].'\',\'1\')" width="30" height="30" type="butto " src="img/add-to-cart.png"></input></p>
 									</div>
 									<div class="caption-full container">
 										<h4 class="text-danger pull-right">'.$ph[$i]['Price'].' Lei</h4>
