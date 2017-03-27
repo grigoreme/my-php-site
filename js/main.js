@@ -28,21 +28,32 @@ function addToCart(cat,item,user,count){
   });
 }
 
-function deleteFromCart(cat,item,user){
-  string = "cat=" +  cat + "&item="+item+"&user="+user+"&tourl=";
+function deleteFromCart(cat,item,user,lang){
+  string = "cat=" +  cat + "&item="+item+"&user="+user;
   $.ajax({
     type: "GET",
     url: "php/deleteFromCart.php",
     data: string,
     success: function(data, textStatus) {
-      window.location.reload(false); 
+      window.location.reload(false);
     },
     error:function(exception){alert('Exeption:'+exception);}
   });
 }
 
-function refreshCart(cat,item,user){
-  alert(cat,item,user);
+function refreshCart(cat,item,user,lang){
+  string = "cat=" +  cat + "&item="+item+"&user="+user+"&count="+$('#'+cat+'_'+item).val()+"&lang="+lang;
+  $.ajax({
+    type: "GET",
+    url: "php/updateCart.php",
+    data: string,
+    success: function(data, textStatus) {
+      $("#result").html(data);
+      if(data.length<1)
+        window.location.reload(false);
+    },
+    error:function(exception){alert('Exeption:'+exception);}
+  });
 }
 
 function findGetParameter(parameterName) {

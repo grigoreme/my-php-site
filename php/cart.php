@@ -40,7 +40,7 @@
                   </td>
                   <td data-th="Subtotal" class="text-center">'.$item['Price']*$item['Count'].' lei</td>
                   <td class="actions" data-th="">
-                    <button onclick="refreshCart(\'1\',\''.$item['ID'].'\',\''.$_SESSION['user_id'].'\')" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                    <button onclick="refreshCart(\'1\',\''.$item['ID'].'\',\''.$_SESSION['user_id'].'\',\''.$_SESSION['lang'].'\')" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
                     <button onclick="deleteFromCart(\'1\',\''.$item['ID'].'\',\''.$_SESSION['user_id'].'\')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                   </td>
                 </tr>';
@@ -63,11 +63,11 @@
                   </td>
                   <td data-th="Price">'.$item['Price'].' lei</td>
                   <td data-th="Quantity">
-                    <input type="number" class="form-control text-center" value="'.$item['Count'].'">
+                    <input id="2_'.$item['ID'].'" type="number" class="form-control text-center" value="'.$item['Count'].'">
                   </td>
                   <td data-th="Subtotal" class="text-center">'.$item['Price']*$item['Count'].' lei</td>
                   <td class="actions" data-th="">
-                    <button onclick="refreshCart(\'2\',\''.$item['ID'].'\',\''.$_SESSION['user_id'].'\')"class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                    <button onclick="refreshCart(\'2\',\''.$item['ID'].'\',\''.$_SESSION['user_id'].'\',\''.$_SESSION['lang'].'\')"class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
                     <button onclick="deleteFromCart(\'2\',\''.$item['ID'].'\',\''.$_SESSION['user_id'].'\')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                   </td>
                 </tr>';
@@ -110,6 +110,7 @@
             <td class="hidden-xs text-center"><strong><?php echo translate_get($_SESSION['lang'],"total"); echo ': '.$total.' lei';?></strong></td>
             <td><a href="#" class="btn btn-success btn-block"><?php echo translate_get($_SESSION['lang'],"checkout");?> <i class="fa fa-angle-right"></i></a></td>
           </tr>
+          <p id="result"></p>
         </tfoot>
       </table>
 	</div>
