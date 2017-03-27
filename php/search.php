@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">	
+    <div class="row">
         <div class="col-md-3">
         </div>
 
@@ -17,7 +17,7 @@
 					</div>
 				</ul>
 			</div>
-			
+
 			<div class="row">
 				<?php
 					if(!isset($_GET['search']) || strlen($_GET['search'])<4)
@@ -39,7 +39,7 @@
 										<h4 class="pull-right"><small><del>'.$calc[$i]['Price'].' lei </del></small>'.(($calc[$i]['Price'])-1).' lei</h4>
 										<p></p>
 										<br><br>
-									
+
 									</div>
 								</div>
 							</div>
@@ -58,10 +58,6 @@
 										<h4 class="pull-right"><small><del>'.$ph[$i]['Price'].' lei </del></small>'.(($ph[$i]['Price'])-1).' lei</h4>
 										<p></p>
 										<br><br>
-										<p>'.translate_get($_SESSION['lang'],"Memorie").': '.$ph[$i]['Memorie'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"SIM_Slots").': '.$ph[$i]['SIM_Slots'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Sistem_Operare").': '.$ph[$i]['Sistem_Operare'].'</p>
-										<p>'.translate_get($_SESSION['lang'],"Chipset").': '.$ph[$i]['Serie_Chipset'].' '.$ph[$i]['Model_Chipset'].'</p>
 									</div>
 								</div>
 							</div>';

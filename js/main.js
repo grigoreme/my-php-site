@@ -7,6 +7,14 @@ $(document).ready(function(){
     });
 });
 
+$('#search').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        goToUrl(updateURLParameter(window.location.href,'page','search'),'search',document.getElementById('search').value);
+    }
+    e.preventDefault();
+});
+
 function findGetParameter(parameterName) {
     var result = null,
         tmp = [];
