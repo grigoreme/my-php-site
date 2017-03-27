@@ -48,7 +48,7 @@
 						?>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
-								<input id="search" type="text" class="form-control" placeholder="<?php echo translate_get($_SESSION['lang'],"search");?>">
+								<input id="search" value="<?php echo isset($_GET['search'])?$_GET['search']:'' ?>" type="text" class="form-control" placeholder="<?php echo translate_get($_SESSION['lang'],"search");?>">
 							</div>
 							<button type="button" onclick="goToUrl(updateURLParameter(window.location.href,'page','search'),'search',document.getElementById('search').value)" class="btn btn-default"><?php echo translate_get($_SESSION['lang'],"search");?></button>
 						</form>

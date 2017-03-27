@@ -196,7 +196,7 @@ class Notebook {
   ";
 
 
-	public function extract_toArray($Sort="",$filter=""){
+	public function extract_toArray($Sort="",$filter="",$search=""){
 		unset($this->calc);
 
 
@@ -215,9 +215,12 @@ class Notebook {
 			else if($Sort=="PriceD") $this->query = $this->query." ORDER BY Price DESC";
 			else if($Sort=="Viewed") { $this->query = $this->query."";}
 			else if($Sort=="ID") { $this->query = $this->query." AND notebook.ID=".$_GET['item'];}
-			else if($Sort=="search") { $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";}
 		}
-    
+
+    if($search!=""){
+      $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";
+    }
+
 		$rows = $this->select($this->query,"notebook");
 		foreach($rows as $row){
 			$this->calc[]=Array(

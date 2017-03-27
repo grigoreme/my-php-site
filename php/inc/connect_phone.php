@@ -214,7 +214,7 @@ class Phone {
     INNER JOIN Serie_Chipset ON phone.ID_Serie_Chipset = Serie_Chipset.ID
     INNER JOIN Model_Chipset ON phone.ID_Model_Chipset = Model_Chipset.ID";
 
-	public function extract_toArray($Sort="",$filter=""){
+	public function extract_toArray($Sort="",$filter="",$search=""){
 		unset($this->Phone);
 
     if($filter!=""){ //filter was already transformed to SQL
@@ -232,10 +232,12 @@ class Phone {
 			else if($Sort=="PriceD") $this->query = $this->query." ORDER BY Price DESC";
 			else if($Sort=="Viewed") { $this->query = $this->query."";}
 			else if($Sort=="ID") { $this->query = $this->query." AND phone.ID=".$_GET['item'];}
-			else if($Sort=="search") { $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";}
-      //var_dump($this->query);
+			//var_dump($this->query);
 		}
-    
+
+    if($search!=""){
+      $this->query = $this->query." AND Firma.Firma LIKE '%".$_GET['search']."%' OR Serie.Serie LIKE '%".$_GET['search']."%' OR Model.Model LIKE '%".$_GET['search']."%'";
+    }
 		$rows = $this->select($this->query,"phone");
     //var_dump($rows);
     //echo ($this->query);
