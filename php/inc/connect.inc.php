@@ -7,17 +7,17 @@ class Db {
 	function __construct($db) {
 		self::$database=$db;
 	}
-	
+
     /**
      * Connect to the database
-     * 
+     *
      * @return bool false on failure / mysqli MySQLi object instance on success
      */
-    public function connect($database) {    
+    public function connect($database) {
         // Try and connect to the database
         if(!isset(self::$connection)) {
             // Load configuration as an array. Use the actual location of your configuration file
-            $config = parse_ini_file('config.ini'); 
+            $config = parse_ini_file('config.ini');
             self::$connection = new mysqli('localhost',$config['username'],$config['password'],$database);
         }
 
@@ -37,7 +37,7 @@ class Db {
      */
     public function query($query,$db) {
         // Connect to the database
-		
+
         $connection = $this -> connect($db);
 
         // Query the database
@@ -59,10 +59,10 @@ class Db {
 			echo "New record created successfully";
 		} else {
 			echo "Error: " . $query . "<br>" . $connection->error;
-		}	
+		}
 
 	}
-	
+
     public function select($query,$db) {
         $rows = array();
         $result = $this -> query($query,$db);
@@ -77,7 +77,7 @@ class Db {
 
     /**
      * Fetch the last error from the database
-     * 
+     *
      * @return string Database error message
      */
     public function error($db) {

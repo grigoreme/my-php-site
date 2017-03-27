@@ -1,12 +1,20 @@
 <div class="container">
-    <div class="row">
-
-        <div class="col-md-12">
-
+  <div class="row">
+    <div class="col-md-12">
 			<div class="row">
 				<?php
 					$curr_db = $db -> select("SELECT Categorie.Database from clopotel_md.Categorie WHERE ID=".intval($_GET['cat']." LIMIT 1"),"clopotel_md");
 					$curr_db = $curr_db[0]['Database'];
+          if($logged=='in'){
+            $userID=$_SESSION['user_id'];
+            $catID=$_GET['cat'];
+            $itemID=$_GET['item'];
+            $date = date('Y-m-d H:i:s');
+            if(isset($catID,$itemID,$userID)){
+              $insert = $db -> query("INSERT INTO View VALUES(null,'$userID','$catID','$itemID','$date')","secure_login");
+            }
+          }
+          //
 					if($curr_db=="notebook"){
 						include_once('inc/connect_notebook.php');
 						$lapt = new Notebook("notebook");

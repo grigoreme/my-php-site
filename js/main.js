@@ -15,6 +15,19 @@ $('#search').keyup(function(e){
     e.preventDefault();
 });
 
+function addToCart(cat,item,user,count){
+  string = "cat=" +  cat + "&item="+item+"&user="+user+"&count="+count;
+  $.ajax({
+    type: "GET",
+    url: "php/addToCart.php",
+    data: string,
+    success: function(data, textStatus) {
+      $("#items").html(data);
+    },
+    error:function(exception){alert('Exeption:'+exception);}
+  });
+}
+
 function findGetParameter(parameterName) {
     var result = null,
         tmp = [];

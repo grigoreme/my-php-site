@@ -69,7 +69,7 @@
         $lapt = new Notebook("notebook");
         $calc = $lapt -> extract_toArray(isset($_GET['sort'])?$_GET['sort']:"",$proceed?$filterSQL:'');
 
-				var_dump($_GET['sort']);
+				//var_dump($_GET['sort']);
 
         if(Count($lapt)==0){
           echo '<div class="container"><p class="h2">'.translate_get('EN','nothing_found').'</p></div>';
