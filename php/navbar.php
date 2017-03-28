@@ -90,8 +90,8 @@
 								else{
 									echo '
 									<form action="index.php?page=process_login" class="form" role="form" method="post"  name="login_form">
-									Email: <input class="form-control" type="text" name="email" />
-									'.translate_get($_SESSION['lang'],"pass").': <input class="form-control" type="password"	name="password"	id="password"/><br>
+									Email: <input id="login_email" class="form-control" type="text" name="email" />
+									'.translate_get($_SESSION['lang'],"pass").': <input id="login_password" class="form-control" type="password"	name="password"	id="password"/><br>
 									<input type="button" class="btn btn-success btn-block" value="'.translate_get($_SESSION['lang'],"login").'"	onclick="formhash(this.form, this.form.password);" />
 								</form>
 									';

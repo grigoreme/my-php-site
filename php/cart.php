@@ -36,7 +36,7 @@
                   </td>
                   <td data-th="Price">'.$item['Price'].' lei</td>
                   <td data-th="Quantity">
-                    <input type="number" class="form-control text-center" value="'.$item['Count'].'">
+                    <input id="1_'.$item['ID'].'" type="number" class="form-control text-center" value="'.$item['Count'].'">
                   </td>
                   <td data-th="Subtotal" class="text-center">'.$item['Price']*$item['Count'].' lei</td>
                   <td class="actions" data-th="">

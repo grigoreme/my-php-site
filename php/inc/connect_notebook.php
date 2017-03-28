@@ -258,7 +258,7 @@ class Notebook {
 			"Sistem_Operare"=>$row['Sistem_Operare'],
 			"Dimensiune"=>$row['Dimensiune'],
 			"Greutate"=>$row['Greutate'],
-			"RAM"=>$row['RAM'],
+			"RAM"=>$row['Ram'],
 			"Capacitate"=>$row['Capacitate'],
 			"Tip_capacitate"=>$row['Tip_capacitate'],
 			"Video"=>$row['Video'],
